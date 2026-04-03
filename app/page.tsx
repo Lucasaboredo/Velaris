@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
+import { products } from "@/lib/products";
 
 export default function Home() {
   useEffect(() => {
@@ -26,25 +28,11 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  const whatsappNumber = "5493447459469";
-  const whatsappMessage = "¡Hola! Vengo de la página web y quiero hacer una consulta sobre las velas.";
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  // Limitando a 3 productos para la home
+  const featuredProducts = products.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#222] font-sans selection:bg-stone-300">
-
-      {/* HEADER */}
-      <header className="w-full bg-[#FDFBF7]/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-stone-100">
-        <div className="max-w-4xl mx-auto flex flex-col items-center py-3 md:py-4 px-4 md:px-6">
-          <h1 className="text-xl md:text-3xl font-[family-name:var(--font-playfair)] tracking-[0.4em] text-stone-900 uppercase mb-3 md:mb-4 text-center">
-            Velaris
-          </h1>
-          <nav className="flex items-center gap-x-6 md:gap-x-12">
-            <a href="#productos" className="text-[10px] md:text-xs font-semibold tracking-[0.2em] text-stone-900 hover:text-stone-600 transition-colors uppercase border-b border-stone-900 pb-0.5">Productos</a>
-            <a href="#cuidados" className="text-[10px] md:text-xs font-semibold tracking-[0.2em] text-stone-400 hover:text-stone-900 transition-colors uppercase">Cuidados</a>
-          </nav>
-        </div>
-      </header>
 
       {/* HERO */}
       <section className="relative w-full h-[60vh] md:h-[85vh] flex items-center justify-center overflow-hidden reveal">
@@ -59,7 +47,7 @@ export default function Home() {
           <img
             src="/logo.jpeg"
             alt="Logo Velaris Central"
-            className="h-32 sm:h-48 md:h-80 w-auto object-contain rounded-full"
+            className="h-32 sm:h-48 md:h-80 w-auto object-contain rounded-full shadow-2xl"
           />
         </div>
       </section>
@@ -90,17 +78,13 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
             <h3 className="text-2xl md:text-4xl font-[family-name:var(--font-playfair)] text-stone-800 tracking-widest uppercase">
-              Catálogo Velaris
+              Selección Velaris
             </h3>
             <div className="w-12 h-[1px] bg-stone-300 mx-auto mt-4"></div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
-            {[
-              { id: 1, name: "Vainilla Esencial", image: "/1.jpeg" },
-              { id: 2, name: "Lavanda Relajante", image: "/2.jpeg" },
-              { id: 3, name: "Cítricos Revitalizantes", image: "/3.jpeg" },
-            ].map((product) => (
+            {featuredProducts.map((product) => (
               <div key={product.id} className="group flex flex-col items-center">
                 <div className="w-full max-w-sm aspect-[4/5] overflow-hidden bg-stone-200 mb-5 md:mb-6 rounded-sm shadow-md group-hover:shadow-2xl transition-all duration-700">
                   <img
@@ -112,9 +96,18 @@ export default function Home() {
                 <h4 className="text-base md:text-lg font-[family-name:var(--font-playfair)] text-stone-800 text-center uppercase tracking-widest">
                   {product.name}
                 </h4>
-                <p className="text-stone-400 text-[10px] md:text-xs mt-2 uppercase tracking-tighter italic">Colección Artesanal</p>
+                <p className="text-stone-400 text-[10px] md:text-xs mt-2 uppercase tracking-tighter italic">{product.category}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <Link
+              href="/productos"
+              className="inline-block px-12 py-4 border border-stone-900 text-stone-900 text-[10px] md:text-xs font-semibold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-all duration-500 rounded-full"
+            >
+              Ver Catálogo Completo
+            </Link>
           </div>
         </div>
       </main>
@@ -175,23 +168,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="w-full bg-[#FDFBF7] border-t border-stone-200 py-6 md:py-8 px-4 md:px-6 flex flex-col justify-center items-center text-stone-500 text-xs md:text-sm text-center">
-        <p>Hecho con amor en Colón, Entre Ríos</p>
-      </footer>
-
-      {/* WHATSAPP FLOTANTE */}
-      <a
-        href={whatsappLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-lg hover:bg-[#1ebe57] transition-all hover:-translate-y-1 z-50 flex items-center justify-center"
-        aria-label="Contactar por WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 md:w-8 md:h-8">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-        </svg>
-      </a>
     </div>
   );
 }
