@@ -57,7 +57,7 @@ export default function Home() {
           <img
             src="/logo.jpeg"
             alt="Logo Velaris"
-            className="h-40 sm:h-56 md:h-80 w-auto object-contain rounded-full shadow-[0_0_60px_rgba(0,0,0,0.4)] border-4 border-white/40"
+            className="h-40 sm:h-56 md:h-80 w-auto object-contain rounded-full border-4 border-white/40"
           />
         </div>
       </section>
