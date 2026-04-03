@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-[#222] font-sans selection:bg-stone-300">
 
-      {/* HERO ADAPTATIVO: Vertical en Mobile, Horizontal en Desktop */}
+      {/* HERO SECTION CON LOGO MÁS ARRIBA Y GRANDE */}
       <section className="relative w-full aspect-[4/5] md:aspect-[21/9] max-h-[85vh] flex items-center justify-center overflow-hidden reveal bg-stone-200">
         <video
           autoPlay
@@ -46,14 +46,14 @@ export default function Home() {
           Tu navegador no soporta la reproducción de video.
         </video>
 
-        {/* Overlay para resaltar el logo */}
         <div className="absolute inset-0 bg-black/20"></div>
 
-        <div className="relative z-10 flex flex-col items-center animate-fade-in px-4">
+        {/* Ajuste de posición: -translate-y-8 o -translate-y-12 lo sube visualmente */}
+        <div className="relative z-10 flex flex-col items-center animate-fade-in px-4 -translate-y-8 md:-translate-y-12">
           <img
             src="/logo.jpeg"
             alt="Logo Velaris Central"
-            className="h-32 sm:h-40 md:h-48 w-auto object-contain rounded-full shadow-2xl border-2 border-white/30"
+            className="h-40 sm:h-56 md:h-72 w-auto object-contain rounded-full shadow-2xl border-4 border-white/30 hover:scale-105 transition-transform duration-700"
           />
         </div>
       </section>
@@ -105,15 +105,15 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-14">
             {featuredProducts.map((product) => (
-              <div key={product.id} className="group flex flex-col items-center">
+              <div key={product.id} className="group flex flex-col items-center cursor-pointer">
                 <div className="w-full max-w-sm aspect-[4/5] overflow-hidden bg-stone-200 mb-6 rounded-xl shadow-sm group-hover:shadow-2xl transition-all duration-700">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-in-out"
                   />
                 </div>
-                <h4 className="text-lg md:text-xl font-[family-name:var(--font-playfair)] text-stone-900 text-center uppercase tracking-widest">
+                <h4 className="text-lg md:text-xl font-[family-name:var(--font-playfair)] text-stone-900 text-center uppercase tracking-widest group-hover:text-stone-600 transition-colors">
                   {product.name}
                 </h4>
                 <p className="text-stone-400 text-[10px] md:text-xs mt-3 uppercase tracking-[0.2em]">{product.category}</p>
@@ -124,7 +124,7 @@ export default function Home() {
           <div className="mt-20 text-center">
             <Link
               href="/productos"
-              className="inline-block px-12 py-4 border border-stone-900 text-stone-900 text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-all duration-500 rounded-full"
+              className="inline-block px-12 py-4 bg-transparent border border-stone-900 text-stone-900 text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-stone-900 hover:text-white transition-all duration-500 rounded-full shadow-sm hover:shadow-md active:scale-95"
             >
               Ver Catálogo Completo
             </Link>
@@ -145,42 +145,51 @@ export default function Home() {
             <div className="space-y-6 text-left">
               {[
                 "Derretir toda la superficie en la primera quemada.",
-                "Mantener el pabilo cortado a 5mm.",
+                "Mantener el pabilo cortado a 5mm siempre.",
                 "No quemar más de 4 horas seguidas.",
                 "Apagar ahogando la llama, nunca soplar."
               ].map((tip, i) => (
                 <div key={i} className="flex gap-5 items-start group">
-                  <div className="w-8 h-8 shrink-0 rounded-full border border-stone-200 flex items-center justify-center text-xs font-bold text-stone-400 group-hover:bg-stone-900 group-hover:text-white transition-colors">
+                  <div className="w-8 h-8 shrink-0 rounded-full border border-stone-200 flex items-center justify-center text-xs font-bold text-stone-400 group-hover:bg-stone-900 group-hover:text-white transition-colors duration-300">
                     {i + 1}
                   </div>
-                  <p className="text-stone-600 text-xs md:text-sm uppercase tracking-wider pt-1">{tip}</p>
+                  <p className="text-stone-600 text-xs md:text-sm uppercase tracking-wider leading-relaxed pt-1">{tip}</p>
                 </div>
               ))}
             </div>
           </div>
           <div className="flex-1 w-full aspect-square md:aspect-auto md:h-[500px] order-1 md:order-2">
-            <img src="/2.jpeg" alt="Cuidado de vela" className="w-full h-full object-cover rounded-2xl shadow-2xl" />
+            <img src="/cuidado.png" alt="Cuidado de vela" className="w-full h-full object-cover rounded-2xl shadow-2xl" />
           </div>
         </div>
       </section>
 
-      {/* INSTAGRAM */}
-      <section className="bg-[#FAF9F6] py-20 md:py-32 px-6 reveal text-center">
-        <h3 className="text-3xl md:text-4xl font-[family-name:var(--font-playfair)] text-stone-900 mb-12 tracking-widest uppercase">
-          Seguinos en Instagram
-        </h3>
-        <a
-          href="https://www.instagram.com/velaris_velas/"
-          target="_blank"
-          className="group inline-block"
-        >
-          <img
-            src="/logo.jpeg"
-            alt="Instagram"
-            className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl border-8 border-white group-hover:scale-105 transition-transform duration-500"
-          />
-          <p className="mt-8 text-stone-500 text-sm md:text-base font-light tracking-[0.3em] uppercase">@velaris_velas</p>
-        </a>
+      {/* SECCIÓN INSTAGRAM */}
+      <section className="bg-[#FAF9F6] py-20 md:py-32 px-6 reveal">
+        <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
+          <h3 className="text-3xl md:text-4xl font-[family-name:var(--font-playfair)] text-stone-900 mb-12 tracking-widest uppercase">
+            Seguinos en Instagram
+          </h3>
+          <a
+            href="https://www.instagram.com/velaris_velas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-block"
+          >
+            <div className="absolute -inset-4 bg-stone-200/50 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <img
+              src="/logo.jpeg"
+              alt="Instagram Velaris"
+              className="relative w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl border-8 border-white group-hover:scale-105 transition-transform duration-500 ease-out"
+            />
+            <div className="mt-8 flex items-center justify-center gap-2 text-stone-500 group-hover:text-stone-900 transition-colors">
+              <span className="text-sm md:text-base font-light tracking-[0.3em] uppercase">@velaris_velas</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </div>
+          </a>
+        </div>
       </section>
 
     </div>
