@@ -177,14 +177,14 @@ export default function Home() {
             Síguenos en Instagram y sumate
           </p>
 
-          <a href="https://www.instagram.com/velaris_velas/" target="_blank" rel="noopener noreferrer" className="group relative inline-block">
+          <a href="https://www.instagram.com/velaris.aromas/" target="_blank" rel="noopener noreferrer" className="group relative inline-block">
             <div className="absolute inset-0 rounded-full bg-stone-300 blur-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-700"></div>
             <img
               src="/logo.jpeg"
               className="relative w-56 h-56 md:w-80 md:h-80 rounded-full object-cover shadow-2xl border-[12px] border-white group-hover:scale-105 transition-transform duration-1000"
               alt="Perfil Instagram Velaris"
             />
-            <p className="mt-10 text-stone-950 text-sm md:text-base font-bold tracking-[0.4em] uppercase group-hover:opacity-70 transition-opacity">@velaris_velas</p>
+            <p className="mt-10 text-stone-950 text-sm md:text-base font-bold tracking-[0.4em] uppercase group-hover:opacity-70 transition-opacity">@velaris.aromas</p>
           </a>
         </div>
       </section>
